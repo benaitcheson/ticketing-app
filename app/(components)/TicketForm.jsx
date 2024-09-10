@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const TicketForm = () => {
+  const router = useRouter();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => {
@@ -16,13 +18,19 @@ const TicketForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("/api/route", {
+    const res = await fetch("/api/Tickets", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ formData }),
     });
-    if (res.ok) {
-      router.push("/");
+    if (!res.ok) {
+      throw new Error("Failed to create ticket");
     }
+
+    router.refresh();
+    router.push("/");
   };
 
   const startingTicketData = {
@@ -37,10 +45,10 @@ const TicketForm = () => {
   const [formData, setFormData] = useState(startingTicketData);
 
   const priorities = [
-    { value: 1, label: 'High' },
-    { value: 2, label: 'Medium-High' },
-    { value: 3, label: 'Medium' },
-    { value: 4, label: 'Low' }
+    { value: 1, label: "High" },
+    { value: 2, label: "Medium-High" },
+    { value: 3, label: "Medium" },
+    { value: 4, label: "Low" },
   ];
   return (
     <div className="flex justify-center">
@@ -95,7 +103,9 @@ const TicketForm = () => {
                 value={priority.value}
                 checked={formData.priority == priority.value}
               />
-              <label htmlFor={`priority-${priority.value}`}>{priority.label}</label>
+              <label htmlFor={`priority-${priority.value}`}>
+                {priority.label}
+              </label>
             </div>
           ))}
         </div>
@@ -112,16 +122,14 @@ const TicketForm = () => {
         />
 
         <label htmlFor="status">Status: </label>
-        <select
-          name="status"
-          onChange={handleChange}
-          value={formData.status}
-        >
+        <select name="status" onChange={handleChange} value={formData.status}>
           <option value="open">Open</option>
           <option value="in-progress">In Progress</option>
           <option value="resolved">Resolved</option>
           <option value="in-review">Code Review</option>
-          <option value="requires-further-information">Requires Further Information</option>
+          <option value="requires-further-information">
+            Requires Further Information
+          </option>
           <option value="closed">Closed</option>
         </select>
 
