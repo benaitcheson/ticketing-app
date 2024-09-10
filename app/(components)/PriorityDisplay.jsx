@@ -3,7 +3,7 @@ import { faFire } from "@fortawesome/free-solid-svg-icons";
 
 const PriorityDisplay = () => {
   return (
-    <div>
+    <div className="flex justify-start align-baseline">
       <FontAwesomeIcon icon={faFire} className="text-red-400" />
       <FontAwesomeIcon icon={faFire} className="text-red-400" />
       <FontAwesomeIcon icon={faFire} className="text-red-400" />
