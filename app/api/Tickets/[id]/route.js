@@ -1,5 +1,16 @@
-import Ticket from "../../(models)/Ticket";
+import Ticket from "../../../(models)/Ticket";
 import { nextResponse } from "next/server";
+
+export async function GET(req, { params }) {
+  try {
+    const { id } = params;
+    const foundTicket = await Ticket.findOne({ _id: id });
+
+    return nextResponse.json({ foundTicket }, { status: 200 });
+  } catch (error) {
+    return nextResponse.json({ message: "Error", error }, { status: 500 });
+  }
+}
 
 export async function DELETE(req, { params }) {
   try {
@@ -10,5 +21,22 @@ export async function DELETE(req, { params }) {
     return nextResponse.json({ message: "Ticket Deleted" }, { status: 200 });
   } catch (error) {
     return nextResponse.json({ message: error.message }, { status: 500 });
+  }
+}
+
+export async function PUT(req, { params }) {
+  try {
+    const { id } = params;
+    const body = await req.json();
+    const ticketData = body.formData;
+
+    const updateTicketData = await Ticket.findByIdAndUpdate(id, {
+      ...ticketData,
+    });
+
+    return nextResponse.json({ message: "Ticket updated" }, { status: 200 });
+  } catch (error) {
+    console.log(error);
+    return nextResponse.json({ message: "Error", error }, { status: 500 });
   }
 }

@@ -1,16 +1,18 @@
 import TicketCard from "./(components)/TicketCard";
 
 const getTickets = async () => {
-  try {
-    const res = await fetch("http://localhost:3000/api/Tickets", {
-      cache: "no-store",
-    });
+  const baseUrl = process.env.NODE_ENV === 'development'
+    ? process.env.LOCAL_API_BASE_URL
+    : process.env.PROD_API_BASE_URL;
 
-    if (!res.ok) {
-      throw new Error("Failed to fetch topics");
+  try {
+    const response = await fetch(`${baseUrl}/api/Tickets`);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch tickets");
     }
 
-    return res.json();
+    return response.json();
   } catch (error) {
     console.log("Error loading topics: ", error);
   }
@@ -19,7 +21,6 @@ const getTickets = async () => {
 const Dashboard = async () => {
   const data = await getTickets();
 
-  // Make sure we have tickets needed for production build.
   if (!data?.tickets) {
     return <p>No tickets.</p>;
   }

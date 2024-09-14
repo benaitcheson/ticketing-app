@@ -1,34 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js Ticketing App
+
+This is a ticketing application built with Next.js, MongoDB, and Tailwind CSS. The app allows users to create, manage, and track tickets.
+
+## Features
+
+- **Create Tickets:** Users can create new tickets with various statuses.
+- **Manage Tickets:** Users can update the status of tickets.
+- **Track Tickets:** Users can view a list of all tickets and filter them by status.
+
+## Technologies Used
+
+- **Next.js:** A React framework for building server-side rendered and statically generated web applications.
+- **MongoDB:** A NoSQL database for storing ticket data.
+- **Tailwind CSS:** A utility-first CSS framework for styling the application.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- Node.js (v14 or higher)
+- MongoDB Atlas account or local MongoDB server
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. **Clone the repository:**
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   ```sh
+    git clone https://github.com/yourusername/ticketing-app.git
+    cd ticketing-app
 
-## Learn More
+2. **Install dependencies:**
 
-To learn more about Next.js, take a look at the following resources:
+   ```sh
+    npm install
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Set up environment variables:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   Create a `.env.local` file in the root of the project and add the following environment variables:
 
-## Deploy on Vercel
+   ```env
+    LOCAL_API_BASE_URL=http://localhost:3000
+    PROD_API_BASE_URL=https://ticketing-app-ashy.vercel.app
+    MONGODB_URI=your_mongodb_connection_string
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Run the development server:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   ```sh
+    npm run dev
+
+5. **Open the app:**
+
+   Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## Deployment
+
+  The app is deployed on Vercel. You can visit the production site here: https://ticketing-app-ashy.vercel.app
+
+  To deploy your own version, you can follow these steps:
+
+  1. Push your code to GitHub.
+  2. Create a new project on Vercel and import your GitHub repository.
+  3. Set up the environment variables in the Vercel dashboard.
+  4. Deploy the project.
+
+## Contributing
+
+  Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
