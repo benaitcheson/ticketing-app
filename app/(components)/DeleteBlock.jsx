@@ -3,14 +3,14 @@
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
+import getBaseUrl from '../utils/getBaseUrl';
 
 const DeleteBlock = ({ id }) => {
   const router = useRouter();
-  const baseUrl = process.env.NODE_ENV === 'development'
-  ? process.env.LOCAL_API_BASE_URL
-  : process.env.PROD_API_BASE_URL;
 
   const deleteTicket = async () => {
+    const baseUrl = getBaseUrl();
+    console.log(baseUrl, "delete");
     const res = await fetch(`${baseUrl}/api/Tickets/${id}`, {
       method: "DELETE",
     });

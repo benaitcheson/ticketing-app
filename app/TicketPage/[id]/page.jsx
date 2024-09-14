@@ -1,8 +1,11 @@
 import TicketForm from "../../(components)/TicketForm";
+import getBaseUrl from '../../utils/getBaseUrl';
 
 const getTicketById = async (id) => {
+  const baseUrl = getBaseUrl();
   try {
-    const res = await fetch(`http://localhost:3000/api/Tickets/${id}`, {
+    console.log(baseUrl, "page.jsx");
+    const res = await fetch(`${baseUrl}/api/Tickets/${id}`, {
       cache: "no-store",
     });
 

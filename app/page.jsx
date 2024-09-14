@@ -1,12 +1,14 @@
 import TicketCard from "./(components)/TicketCard";
+import getBaseUrl from './utils/getBaseUrl';
 
 const getTickets = async () => {
-  const baseUrl = process.env.NODE_ENV === 'development'
-    ? process.env.LOCAL_API_BASE_URL
-    : process.env.PROD_API_BASE_URL;
+  const baseUrl = getBaseUrl();
 
   try {
-    const response = await fetch(`${baseUrl}/api/Tickets`);
+    console.log(baseUrl, "get");
+    const response = await fetch(`${baseUrl}/api/Tickets`, {
+      cache: "no-store",
+    });
 
     if (!response.ok) {
       throw new Error("Failed to fetch tickets");
